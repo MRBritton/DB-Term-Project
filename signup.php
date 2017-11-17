@@ -14,6 +14,7 @@ session_start()
     <input type="text" name="fav_actor" required>Who is your favorite actor?<br>
     <input type="submit" name="sign_up" value="Sign up">
 </form>
+<button onclick="returnHome()">Back</button>
 
 <?php
     $db_server = "db1.cs.uakron.edu:3306";
@@ -46,12 +47,17 @@ session_start()
             //Update favorite actor
             $query = "INSERT INTO FavoriteActor(userID, actorID)
                     SELECT (SELECT id FROM Users WHERE username = '$username') as userID,
-                            (SELECT id FROM Actors WHERE name = '$new_fav_actor') as actorID;";
+                           (SELECT id FROM Actors WHERE name = '$new_fav_actor') as actorID;";
             //If the user's favorite actor is successfully updated, creation is complete
             if(mysqli_query($db, $query)) {
-                $_SESSION["userID"] = 
-                print("<p>Successfully created new user</p>");
-                print("<button onclick=\"returnHome()\">Back</button>")
+                //Get the userID to serve as a $_SESSION variable
+                $userID = -1;
+                $result = mysqli_query($db, "SELECT id FROM Users WHERE username = '$username';");
+                while($row = mysqli_fetch_assoc($result)) {
+                    //There's only one row
+                    $userID = $row["id"];
+                }
+                $_SESSION["userID"] = $userID;
             }
         }
     }

@@ -9,7 +9,18 @@ session_start();
 </head>
 
 <header>
-    <h2>Welcome to Cinematch!</h2>
+    <h2>Welcome to Cinematch
+        <?php
+            if(isset($_SESSION["userID"]))
+                $db = mysqli_connect("db1.cs.uakron.edu", "mrb182", "cai5viCu", "ISP_mrb182");
+                $result = mysqli_query($db, "SELECT username FROM Users WHERE id = " . $_SESSION["userID"]);
+                $un = "";
+                while($row = mysqli_fetch_assoc($result)) {
+                    $un = $row["username"];
+                }
+                print($un);
+        ?>
+        !</h2>
 </header>
 <body>
     <div id="login">

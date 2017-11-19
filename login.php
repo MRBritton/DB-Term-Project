@@ -8,7 +8,7 @@
     function validateLogin($username, $password) {
         //query the database to find a matching username
         $db = mysqli_connect("db1.cs.uakron.edu:3306", "mrb182", "cai5viCu", "ISP_mrb182");
-        $query = "SELECT id FROM UsersCM WHERE username = '$username' AND password = '$password';";
+        $query = "SELECT id FROM Users WHERE username = '$username' AND password = '$password';";
         $result = mysqli_query($db, $query);
         mysqli_close($db);
         

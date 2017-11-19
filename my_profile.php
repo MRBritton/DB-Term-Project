@@ -36,6 +36,14 @@ session_start();
 </form>
 <hr>
 
+<p>Change your favorite actor?</p>
+<form method="POST" action="my_profile.php">
+    <input type="text" name="actor_name" required>Actor name<br>
+    <input type="submit" name="change_fav_actor" value="Submit">
+</form>
+<hr>
+
+
 <button onclick="returnHome()">Back</button>
 
 <?php    
@@ -73,6 +81,32 @@ session_start();
         mysqli_query($db, $query);
     }
 
+    //handle updating favorite actor
+    elseif(isset($_POST["change_fav_actor"])) {
+        $new_fav = $_POST["actor_name"];
+
+        $query = "UPDATE FavoriteActor
+                  SET actorID = (SELECT id FROM Actors WHERE name = '$new_fav')
+                  WHERE userID = $userID;";
+        mysqli_query($db, $query);
+    }
+
+    //display favorite actor
+    $query = "SELECT name
+              FROM Actors
+              WHERE id = (SELECT actorID
+                          FROM FavoriteActor
+                          WHERE userID = $userID);";
+
+    $result = mysqli_query($db, $query);
+
+    $fav_actor_name = "";
+    while($row = mysqli_fetch_assoc($result)) {
+        $actor_name = $row["name"];
+    }
+
+    print("<p style=\"text-align:center\">Favorite actor: $actor_name</p>");
+
     //Display liked movies
     $query = "SELECT name
               FROM (SELECT movieID
@@ -82,7 +116,7 @@ session_start();
     $result = mysqli_query($db, $query);
 
     print("<table align=\"center\">");
-    print("<caption>Likes</caption>");
+    print("<caption>Liked movies</caption>");
     while($row = mysqli_fetch_assoc($result)) {
         print("<tr><td>".$row["name"]."</tr></td>");
     }

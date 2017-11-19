@@ -38,6 +38,23 @@ session_start()
                 (username, password)
                 VALUES ('$new_username', '$new_password');";
         
+        //Log the new user in automatically
+        $query = "SELECT id
+                  FROM Users
+                  WHERE username = '$new_username';";
+        $result = mysqli_query($db, $query);
+
+        $userID = 0;
+        while($row = mysqli_fetch_assoc($result))
+            $userID = $row["id"];
+        $_SESSION["userID"] = $userID;
+
+        //Update their favorite actor
+        $query = "INSERT INTO FavoriteActor(userID, actorID)
+                  SELECT ($userID) as userID, 
+                    (SELECT id 
+                     FROM Actors 
+                     WHERE name = '$new_fav_actor') as actorID";
         mysqli_query($db, $query);
     }
     

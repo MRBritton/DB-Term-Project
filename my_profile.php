@@ -121,6 +121,8 @@ session_start();
         print("<tr><td>".$row["name"]."</tr></td>");
     }
     print("</table>");
+
+    mysqli_close($db);
 ?>
 </body> 
 

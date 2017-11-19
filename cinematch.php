@@ -11,7 +11,7 @@ session_start();
 <header>
     <h2>Welcome to Cinematch
         <?php
-            if(isset($_SESSION["userID"]))
+            if(isset($_SESSION["userID"])){
                 $db = mysqli_connect("db1.cs.uakron.edu", "mrb182", "cai5viCu", "ISP_mrb182");
                 $result = mysqli_query($db, "SELECT username FROM Users WHERE id = " . $_SESSION["userID"]);
                 $un = "";
@@ -19,6 +19,8 @@ session_start();
                     $un = $row["username"];
                 }
                 print($un);
+                mysqli_close($db);
+            }
         ?>
         !</h2>
 </header>

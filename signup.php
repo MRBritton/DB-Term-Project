@@ -57,6 +57,8 @@ session_start()
                      WHERE name = '$new_fav_actor') as actorID";
         mysqli_query($db, $query);
     }
+
+    mysqli_close($db);
     
 
 ?>

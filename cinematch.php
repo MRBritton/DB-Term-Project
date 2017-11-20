@@ -32,7 +32,8 @@ session_start();
         <input type="text" name="password" required>Password<br>
         <input type="submit" name="log_in" value="Log In">
         </form>
-        <button onclick="visitSignUp()">Sign up</button>
+        <button onclick="visitSignUp()">Sign up</button><br>
+        <a href="search.php">Search movies</a>
     
     </div>
 

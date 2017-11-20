@@ -5,3 +5,4 @@ function visitSignUp() {
 function returnHome() {
     window.location = "cinematch.php";
 }
+

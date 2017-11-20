@@ -40,10 +40,10 @@
             $logged_in = validateLogin($un, $pw);
             if($logged_in) {
                 $_SESSION["userID"] = $logged_in;
-                print("Successfully logged in!");
+                print("<br>Successfully logged in!");
             }
             else
-                print("Login falied.");    
+                print("<br>Login falied.");    
         }
     }
 ?>

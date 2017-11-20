@@ -14,7 +14,8 @@ session_start()
     <input type="text" name="fav_actor" required>Who is your favorite actor?<br>
     <input type="submit" name="sign_up" value="Sign up">
 </form>
-<button onclick="returnHome()">Back</button>
+<button onclick="returnHome()">Back</button><br>
+
 
 <?php
     $db = mysqli_connect("db1.cs.uakron.edu:3306", "mrb182", "cai5viCu", "ISP_mrb182");

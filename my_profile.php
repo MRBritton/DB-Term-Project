@@ -78,7 +78,12 @@ session_start();
                   WHERE movieID = (SELECT id
                                    FROM Movies
                                    WHERE name = '$movieName');";
-        mysqli_query($db, $query);
+        if(mysqli_query($db, $query)) {
+            print("Successfully removed!");
+        }
+        else {
+            print("Could not remove movie from your likes.");
+        }
     }
 
     //handle updating favorite actor
@@ -88,6 +93,7 @@ session_start();
         $query = "UPDATE FavoriteActor
                   SET actorID = (SELECT id FROM Actors WHERE name = '$new_fav')
                   WHERE userID = $userID;";
+        //TODO: error handling
         mysqli_query($db, $query);
     }
 

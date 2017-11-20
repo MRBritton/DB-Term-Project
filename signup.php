@@ -37,25 +37,32 @@ session_start()
         $query = "INSERT INTO Users
                 (username, password)
                 VALUES ('$new_username', '$new_password');";
-        
-        //Log the new user in automatically
-        $query = "SELECT id
-                  FROM Users
-                  WHERE username = '$new_username';";
-        $result = mysqli_query($db, $query);
-
-        $userID = 0;
-        while($row = mysqli_fetch_assoc($result))
-            $userID = $row["id"];
-        $_SESSION["userID"] = $userID;
-
-        //Update their favorite actor
-        $query = "INSERT INTO FavoriteActor(userID, actorID)
-                  SELECT ($userID) as userID, 
-                    (SELECT id 
-                     FROM Actors 
-                     WHERE name = '$new_fav_actor') as actorID";
         mysqli_query($db, $query);
+        
+        if(!mysqli_affected_rows($db)) {
+            print("Could not create an account with provided credentials");
+        }
+        //Log the new user in automatically
+        else {
+            $query = "SELECT id
+                    FROM Users
+                    WHERE username = '$new_username' AND password = '$new_password';";
+            $result = mysqli_query($db, $query);
+
+            $userID = 0;
+            while($row = mysqli_fetch_assoc($result))
+                $userID = $row["id"];
+            $_SESSION["userID"] = $userID;
+            
+
+            //Update their favorite actor
+            $query = "INSERT INTO FavoriteActor(userID, actorID)
+                    SELECT ($userID) as userID, 
+                        (SELECT id 
+                        FROM Actors 
+                        WHERE name = '$new_fav_actor') as actorID";
+            mysqli_query($db, $query);
+        }
     }
 
     mysqli_close($db);

@@ -3,12 +3,18 @@ session_start()
 ?>
 <!DOCTYPE html>
 <head>
+<meta charset="UTF-8">
+    <meta name="description" content="Cinematch">
     <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        html {
+            background-color: #dfdfdf;
+        }
+    </style>
 </head>
 
 <body>
-<form method="POST" action="signup.php">
+<form method="POST" action="signup.php" accept-charset="UTF-8">
     <input type="text" name="username" required>Username<br>
     <input type="text" name="password" required>Password<br>
     <input type="text" name="fav_actor" required>Who is your favorite actor?<br>

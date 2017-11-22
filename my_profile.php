@@ -4,8 +4,13 @@ session_start();
 
 <!DOCTYPE html>
 <head>
-<script src="script.js"></script>
-<style>
+    <meta charset="UTF-8">
+    <meta name="description" content="Cinematch">
+    <script src="script.js"></script>
+<style>  
+    html {
+        background-color: #dfdfdf;
+    }
     table, tr, td {
         border: 1px solid black;
         border-collapse: collapse;
@@ -22,7 +27,7 @@ session_start();
 
 <body>
 <p>Names of movies that you like??</p>
-<form method="POST" action="my_profile.php">
+<form method="POST" action="my_profile.php" accept-charset="UTF-8">
     <!--TODO: Some Ajax/jQuery trickery for movies like what they're typing?-->
     <input type="text" name="movie_name" required>Movie name<br>
     <input type="submit"  name="add_movie" value="Submit">
@@ -30,14 +35,14 @@ session_start();
 <hr>
 
 <p>Movies you no longer like?</p>
-<form method="POST" action="my_profile.php">
+<form method="POST" action="my_profile.php" accept-charset="UTF-8">
     <input type="text" name = "movie_name" required>Movie name<br>
     <input type="submit" name="remove_movie" value="Submit">
 </form>
 <hr>
 
 <p>Change your favorite actor?</p>
-<form method="POST" action="my_profile.php">
+<form method="POST" action="my_profile.php" accept-charset="UTF-8">
     <input type="text" name="actor_name" required>Actor name<br>
     <input type="submit" name="change_fav_actor" value="Submit">
 </form>
@@ -60,7 +65,7 @@ session_start();
         //TODO: Make stored procedures for this
         $query = "INSERT INTO Likes(userID, movieID)
                 SELECT '$userID' as userID, 
-                (SELECT id FROM Movies WHERE name = '$movieName') as movieID";
+                (SELECT id FROM Movies WHERE name = '" . utf8_decode($movieName) ."') as movieID";
 
         if(mysqli_query($db, $query)) {
             print("Successfully updated your likes!");
@@ -77,12 +82,12 @@ session_start();
         $query = "DELETE FROM Likes
                   WHERE movieID = (SELECT id
                                    FROM Movies
-                                   WHERE name = '$movieName');";
+                                   WHERE name = '" .utf8_decode($movieName) ."');";
         if(mysqli_query($db, $query)) {
-            print("Successfully removed!");
+            print("<p>Successfully removed!</p>");
         }
         else {
-            print("Could not remove movie from your likes.");
+            print("<p>Could not remove movie from your likes.</p>");
         }
     }
 
@@ -91,7 +96,7 @@ session_start();
         $new_fav = $_POST["actor_name"];
 
         $query = "UPDATE FavoriteActor
-                  SET actorID = (SELECT id FROM Actors WHERE name = '$new_fav')
+                  SET actorID = (SELECT id FROM Actors WHERE name = '" . utf8_decode($new_fav) . "')
                   WHERE userID = $userID;";
         //TODO: error handling
         mysqli_query($db, $query);
@@ -124,7 +129,7 @@ session_start();
     print("<table align=\"center\">");
     print("<caption>Liked movies</caption>");
     while($row = mysqli_fetch_assoc($result)) {
-        print("<tr><td>".$row["name"]."</tr></td>");
+        print("<tr><td>".utf8_encode($row["name"])."</tr></td>");
     }
     print("</table>");
 

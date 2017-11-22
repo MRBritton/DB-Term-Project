@@ -2,7 +2,16 @@
     session_start();
 ?>
 <!DOCTYPE html>
-<script src="script.js"></script>
+<head>
+<meta charset="UTF-8">
+    <meta name="description" content="Cinematch">
+    <script src="script.js"></script>
+    <style>
+        html {
+            background-color: #dfdfdf;
+        }
+    </style>
+</head>
 <?php
 
     function validateLogin($username, $password) {
@@ -40,10 +49,10 @@
             $logged_in = validateLogin($un, $pw);
             if($logged_in) {
                 $_SESSION["userID"] = $logged_in;
-                print("<br>Successfully logged in!");
+                print("<p>Successfully logged in!</p>");
             }
             else
-                print("<br>Login falied.");    
+                print("<p>>Login falied.</p>");    
         }
     }
 ?>

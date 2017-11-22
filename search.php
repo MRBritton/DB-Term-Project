@@ -4,6 +4,13 @@
 
 <!DOCTYPE html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Cinematch">
+    <style>
+        html {
+            background-color: #dfdfdf;
+        }
+    </style>
     <script>
         function validateRating() {
             var rating = parseFloat(document.getElementById("rating").value);
@@ -24,40 +31,44 @@
 <body>
     <p>Search movies by rating</p>
     <form action="search.php" method="POST">
-        <input type="text" name="rating" id="rating" value="5.0" onblur="validateRating()">Rating<br>
+        <input type="text" name="rating" id="rating" onblur="validateRating()">Rating<br>
         <input type="radio" name="comp" value="equal_to">Equal to<br>
         <input type="radio" name="comp" value="less_than">Less than<br>
         <input type="radio" name="comp" value="greater_than">Greater than<br>
         <input id="search-btn" type="submit" value="Search"><div id="error-msg"></div>
     </form>
-
+    <hr>
 
     <?php
-        $db = mysqli_connect("db1.cs.uakron.edu:3306", "mrb182", "cai5viCu", "ISP_mrb182");
-        $query = "SELECT name, rating, releaseYear FROM Movies WHERE rating";
+    if(!empty($_POST)) {
+            if(isset($_POST["comp"]) && isset($_POST["rating"])) {
+            $db = mysqli_connect("db1.cs.uakron.edu:3306", "mrb182", "cai5viCu", "ISP_mrb182");
+            $query = "SELECT name, rating, releaseYear FROM Movies WHERE rating";
 
-        $comparison = $_POST["comp"];
-        $rating = $_POST["rating"];
+            $comparison = $_POST["comp"];
+            $rating = $_POST["rating"];
 
-        if($comparison == "equal_to") 
-            $query = $query . " = ";
-        elseif($comparison == "less_than")
-            $query = $query . " <= ";
-        elseif($comparison == "greater_than")
-            $query = $query . " >= ";
-        
-        $query = $query . $rating;
+            if($comparison == "equal_to") 
+                $query = $query . " = ";
+            elseif($comparison == "less_than")
+                $query = $query . " <= ";
+            elseif($comparison == "greater_than")
+                $query = $query . " >= ";
+            
+            $query = $query . number_format($rating, 1);
+            $result = mysqli_query($db, $query);
 
-        $result = mysqli_query($db, $query);
+            print("<table><caption>Movies(" . mysqli_num_rows($result) . ")</caption>");
+            print("<tr><th>Name</th><th>Rating</th><th>Release year</th></tr>");
+            while($row = mysqli_fetch_assoc($result)) {
+                print("<tr><td>" . utf8_encode($row["name"]) . "</td><td>" . $row["rating"] . "</td><td>" . $row["releaseYear"] . "</td></tr>");
+            }
+            
 
-        
-        while($row = mysqli_fetch_assoc($result)) {
-            //output as a table
+
+            mysqli_close($db);
         }
-
-
-        mysqli_close($db, $query);
-
+    }
     ?>
 </body>
 </html>

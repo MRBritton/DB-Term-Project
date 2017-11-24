@@ -10,6 +10,10 @@
         html {
             background-color: #dfdfdf;
         }
+        
+        .invisible {
+            opacity: 0;
+        }
     </style>
     <script>
         function validateRating() {
@@ -58,10 +62,15 @@
             $query = $query . number_format($rating, 1);
             $result = mysqli_query($db, $query);
 
-            print("<table><caption>Movies(" . mysqli_num_rows($result) . ")</caption>");
+            print("<table align=\"center\"><caption>Movies(" . mysqli_num_rows($result) . ")</caption>");
+            print("<caption>Click the \"?\" next to any movie for more info.</caption>");
             print("<tr><th>Name</th><th>Rating</th><th>Release year</th></tr>");
             while($row = mysqli_fetch_assoc($result)) {
-                print("<tr><td>" . utf8_encode($row["name"]) . "</td><td>" . $row["rating"] . "</td><td>" . $row["releaseYear"] . "</td></tr>");
+                print("<tr><td>" . utf8_encode($row["name"]) . "</td><td>" . $row["rating"] . "</td><td>" . $row["releaseYear"] . "</td>");
+                //print a hidden unwritable form to send the data if the user wants more info
+                print("<td><form method=\"POST\" action=\"info.php\">
+                           <input type=\"text\" name=\"movie\" class=\"invisible\" value=\"" . $row["name"] . "\" readonly>
+                           <input type=\"submit\" value=\"?\"></td></form></tr>");
             }
             
 

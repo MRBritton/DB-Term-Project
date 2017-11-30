@@ -11,6 +11,7 @@
         .invisible {
             opacity: 0;
         }
+        
     </style>
     <script>
         function visitSearch() {
@@ -53,7 +54,7 @@
         }
     }
 ?>
-<button onclick="visitSearch()">Back</button>
+<button onclick="visitSearch()">Back to search</button>
 </body>
 
 </html>

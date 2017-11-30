@@ -52,7 +52,7 @@
                 print("<p>Successfully logged in!</p>");
             }
             else
-                print("<p>>Login falied.</p>");    
+                print("<p>Login failed.</p>");    
         }
     }
 ?>

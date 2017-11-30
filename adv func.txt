@@ -1,0 +1,14 @@
+advanced: 
+Suggest similar movies
+    
+    years +-5 AND
+    Ratings: avg of currenty liked +- 2 
+    WITH movies with the same actors
+    UNION fav actor
+    - CURRENTLY LIKED 
+    
+Connect with similar users
+
+    Like similar movies OR similar actors U fav actor
+
+    SIMILAR ACTORS: ACtors in movies that they already like

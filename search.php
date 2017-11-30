@@ -70,7 +70,7 @@
                 //print a hidden unwritable form to send the data if the user wants more info
                 print("<td><form method=\"POST\" action=\"info.php\">
                            <input type=\"text\" name=\"movie\" class=\"invisible\" value=\"" . $row["name"] . "\" readonly>
-                           <input type=\"submit\" value=\"?\"></td></form></tr>");
+                           <input type=\"submit\" value=\"?\"></form></td></tr>");
             }
             
 

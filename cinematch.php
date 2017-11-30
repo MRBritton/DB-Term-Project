@@ -83,7 +83,7 @@ session_start();
     <a href="search.php">Search movies</a>
     <?php
         if(isset($_SESSION["userID"])) {
-            print " | <a href=\"my_profile.php\">Edit profile</a>";
+            print " | <a href=\"my_profile.php\">Edit profile</a> | <a href=\"recommend_movies.php\">Recommended movies</a>";
         }
     ?>
     </nav>

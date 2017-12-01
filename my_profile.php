@@ -26,7 +26,7 @@ session_start();
 </head>
 
 <body>
-<p>Names of movies that you like??</p>
+<p>Add a movie that you like by name:</p>
 <form method="POST" action="my_profile.php" accept-charset="UTF-8">
     <!--TODO: Some Ajax/jQuery trickery for movies like what they're typing?-->
     <input type="text" name="movie_name" required>Movie name<br>
@@ -34,14 +34,14 @@ session_start();
 </form>
 <hr>
 
-<p>Movies you no longer like?</p>
+<p>Remove a movie you no longer like:</p>
 <form method="POST" action="my_profile.php" accept-charset="UTF-8">
     <input type="text" name = "movie_name" required>Movie name<br>
     <input type="submit" name="remove_movie" value="Submit">
 </form>
 <hr>
 
-<p>Change your favorite actor?</p>
+<p>Change your favorite actor:</p>
 <form method="POST" action="my_profile.php" accept-charset="UTF-8">
     <input type="text" name="actor_name" required>Actor name<br>
     <input type="submit" name="change_fav_actor" value="Submit">

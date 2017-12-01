@@ -37,9 +37,9 @@
 
         $result = mysqli_query($db, $query);
     
-        print "<b>Movie: </b>" . $movie_name . "<br><b>Stars: </b><ul>";
+        print "<b>Movie: </b>" . $movie_name . "<br><b>Stars:</b><ul>";
         while($row = mysqli_fetch_assoc($result)) {
-             print "<li>" . $row["name"] . "</li>";
+             print "<li>" . utf8_encode($row["name"]) . "</li>";
         }
         print "</ul>";
         mysqli_close($db);

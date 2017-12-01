@@ -69,6 +69,8 @@ session_start()
                         FROM Actors 
                         WHERE name = '$new_fav_actor') as actorID";
             mysqli_query($db, $query);
+
+            print "<p>Successfully created your account! You have been automatically logged in!<br>Press the \"Back\" button to return home.</p>";
         }
     }
 
@@ -76,5 +78,6 @@ session_start()
     
 
 ?>
+
 </body>
 </html>

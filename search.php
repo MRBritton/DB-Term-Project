@@ -29,24 +29,44 @@
                 errMsg.innerHTML = "";
             }
         }
+
+        function returnHome() {
+            window.location = "cinematch.php";
+        }
     </script>
 </head>
 <!--- ALSO SEARHC BY YEAR AND LIST OF MOVIES WITH FAVORITE ACTOR-->
 <body>
+    <div style="float:left; padding-left: 30px; padding-bottom: 5px; padding-right: 25px;">
     <p>Search movies by rating</p>
     <form action="search.php" method="POST">
-        <input type="text" name="rating" id="rating" onblur="validateRating()">Rating<br>
+        <input type="text" name="rating" id="rating" onblur="validateRating()"> Rating<br>
         <input type="radio" name="comp" value="equal_to">Equal to<br>
         <input type="radio" name="comp" value="less_than">Less than<br>
         <input type="radio" name="comp" value="greater_than">Greater than<br>
-        <input id="search-btn" type="submit" value="Search"><div id="error-msg"></div>
+        <input type="submit" value="Search" name="search_by_rating">
+        
     </form>
-    <hr>
+    </div>
+
+    <div style="float:left;">
+        <p>Search movies by name</p>
+        <form action="search.php" method="post">
+            <input style="margin-bottom: 5px;" type="text" name="movie_name" required> Name<br>
+            <input type="submit" value="Search" name="search_by_name">
+        </form>
+    </div>
+    <div style="clear:both;" id="error-msg"></div>
+    <hr style="clear:both;">
+
+    
 
     <?php
     if(!empty($_POST)) {
+        $db = mysqli_connect("db1.cs.uakron.edu:3306", "mrb182", "cai5viCu", "ISP_mrb182");
+        if(isset($_POST["search_by_rating"])){
             if(isset($_POST["comp"]) && isset($_POST["rating"])) {
-            $db = mysqli_connect("db1.cs.uakron.edu:3306", "mrb182", "cai5viCu", "ISP_mrb182");
+            
             $query = "SELECT name, rating, releaseYear FROM Movies WHERE rating";
 
             $comparison = $_POST["comp"];
@@ -61,6 +81,13 @@
             
             $query = $query . number_format($rating, 1);
             $result = mysqli_query($db, $query);
+            }
+        }
+        elseif(isset($_POST["search_by_name"])) {
+            $query = "SELECT name, rating, releaseYear FROM Movies WHERE name LIKE '%" . $_POST["movie_name"] . "%'";
+        }
+
+        $result = mysqli_query($db, $query);          
 
             print("<table align=\"center\"><caption>Movies(" . mysqli_num_rows($result) . ")</caption>");
             print("<caption>Click the \"?\" next to any movie for more info.</caption>");
@@ -76,8 +103,10 @@
 
 
             mysqli_close($db);
-        }
+        
     }
     ?>
+
+<button onclick="returnHome()">Back</button><br>
 </body>
 </html>

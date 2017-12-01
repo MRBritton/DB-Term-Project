@@ -16,6 +16,12 @@
             border-collapse: collapse;
         }
     </style>
+
+    <script>
+        function returnHome() {
+            window.location = "cinematch.php";
+        }
+    </script>
 </head>
 <body>
 <?php
@@ -101,7 +107,7 @@
     )
     
     
-    AND
+    OR
     
     /* The movie stars the user's favorite actor */
     Movies.id IN 
@@ -144,7 +150,7 @@
         print "<table>
                <tr><th>Name</th><th>Rating</th><th>Release Year</th><th>More info</th></tr>";
         while($row = mysqli_fetch_assoc($similarMovies)) {
-            print "<tr><td>" . $row["name"] . "</td><td>" . $row["rating"] . "</td><td>" . $row["releaseYear"] . "</td>";
+            print "<tr><td>" . utf8_encode($row["name"]) . "</td><td>" . $row["rating"] . "</td><td>" . $row["releaseYear"] . "</td>";
             print "<td><form action=\"info.php\" method=\"POST\">
                    <input type=\"text\" name=\"movie\" class=\"invisible\" value=\"" . $row["name"] . "\" readonly>
                    <input type=\"submit\"  value=\"?\"></form></td></tr>";
@@ -155,5 +161,6 @@
         mysqli_close($db);
     }
 ?>
+<button onclick="returnHome()">Back</button><br>
 </body>
 </html>

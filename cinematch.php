@@ -16,7 +16,7 @@ session_start();
             background-color: white;
             padding: 5px;
             margin: auto;
-            width: 20%;
+            width: 25%;
             text-align: center;
             border: 1px solid black;
             border-radius: 3px;
@@ -25,15 +25,15 @@ session_start();
             text-align: center;
         }
         #login {
-            text-align: center;
-            position: absolute;
-            top: 5px;
-            right: 100px;
+            float: right;
+            margin-right: 40px;
+            margin-top: -30px;
             padding: 5px;
             min-height: 100px;
             min-width: 100px;
             border: 3px solid black;
             border-radius: 10px;
+            text-align: center;
         }
     </style>
 </head>
@@ -61,8 +61,8 @@ session_start();
         <div id=\"login\">
         <p>Login</p>
         <form method=\"POST\" action=\"login.php\">
-        <input type=\"text\" name=\"username\" required> Username<br>
-        <input type=\"text\" name=\"password\" required>   Password<br>
+        Username <input type=\"text\" name=\"username\" required><br>
+        Password <input type=\"text\" name=\"password\" required><br>
         <input type=\"submit\" name=\"log_in\" value=\"Log In\">
         </form>
         <button onclick=\"visitSignUp()\">Sign up</button><br>
@@ -83,7 +83,7 @@ session_start();
     <a href="search.php">Search movies</a>
     <?php
         if(isset($_SESSION["userID"])) {
-            print " | <a href=\"my_profile.php\">Edit profile</a> | <a href=\"recommend_movies.php\">Recommended movies</a>";
+            print " | <a href=\"my_profile.php\">Edit profile</a> | <a href=\"recommend_movies.php\">Recommended movies</a> | <a href=\"recommend_users.php\">Connect with other users</a>";
         }
     ?>
     </nav>

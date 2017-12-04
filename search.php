@@ -41,7 +41,7 @@
     <p>Search movies by rating</p>
     <form action="search.php" method="POST">
         <input type="text" name="rating" id="rating" onblur="validateRating()"> Rating<br>
-        <input type="radio" name="comp" value="equal_to">Equal to<br>
+        <!--<input type="radio" name="comp" value="equal_to">Equal to<br>-->
         <input type="radio" name="comp" value="less_than">Less than<br>
         <input type="radio" name="comp" value="greater_than">Greater than<br>
         <input type="submit" value="Search" name="search_by_rating">
@@ -72,7 +72,7 @@
             $comparison = $_POST["comp"];
             $rating = $_POST["rating"];
 
-            if($comparison == "equal_to") 
+            if($comparison == "equal_to")  //THIS SHOULDN'T EVER HAPPEN
                 $query = $query . " = ";
             elseif($comparison == "less_than")
                 $query = $query . " <= ";

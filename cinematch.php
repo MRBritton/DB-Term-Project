@@ -62,7 +62,7 @@ session_start();
         <p>Login</p>
         <form method=\"POST\" action=\"login.php\">
         Username <input type=\"text\" name=\"username\" required><br>
-        Password <input type=\"text\" name=\"password\" required><br>
+        Password&nbsp; <input type=\"password\" name=\"password\" required><br>
         <input type=\"submit\" name=\"log_in\" value=\"Log In\">
         </form>
         <button onclick=\"visitSignUp()\">Sign up</button><br>

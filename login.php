@@ -9,6 +9,7 @@
     <style>
         html {
             background-color: #dfdfdf;
+            text-align: center;
         }
     </style>
 </head>

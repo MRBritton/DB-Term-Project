@@ -7,10 +7,11 @@
     <style>
         html {
             background-color: #dfdfdf;
+            text-align: center;
         }
         .invisible {
             opacity: 0;
-        }
+        }  
         
     </style>
 
@@ -105,7 +106,7 @@
             print "<p>We couldn't find any similar users to recommend for you!</p>";
         }
         else {
-            print "<table align=\"center\">
+            print "<table align=\"center\"><caption>We found these users for you.</caption>
                     <tr><th>Username</th></tr>";
             while($row = mysqli_fetch_assoc($similarUsers)) {
                 print "<tr><td>" . $row["username"] . "</td>";

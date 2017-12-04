@@ -3,6 +3,17 @@
     <style>
         html {
             background-color: #dfdfdf;
+            text-align: center;
+        }
+        table, tr, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        table tr:nth-child(even) {
+            background-color: lightgoldenrodyellow;
+        }
+        table tr:nth-child(odd) {
+            background-color: lightcyan
         }
     </style>
 
@@ -52,8 +63,9 @@
             $result = mysqli_query($db, $query);
 
             //Display the info
-            print "<p style=\"text-align: center\"> $username's favorite actor is: $favoriteActor</p>";
-            print "<table align=\"center\"";
+            print "<b><p style=\"text-align: center; margin:3px;\"> $username's favorite actor is:</b> $favoriteActor</p>";
+            print "<table align=\"center\"><caption> $username's liked movies:</caption>
+            <tr><th>Name</th><th>Rating</th><th>Release Year</th></tr>";
             while($row = mysqli_fetch_assoc($result)) {
                 print "<tr><td>" . $row["name"] . "</td><td>" . $row["rating"] . "</td><td>" . $row["releaseYear"] . "</td></tr>";
             }
@@ -63,6 +75,6 @@
         }
     ?>
 
-<button onclick="returnHome()">Back</button>
+<button style="margin:3px;" onclick="returnHome()">Back</button>
 </body>
 </html>

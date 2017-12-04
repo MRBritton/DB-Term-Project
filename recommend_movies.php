@@ -15,6 +15,14 @@
             border: 1px solid black;
             border-collapse: collapse;
         }
+
+        table tr:nth-child(even) {
+            background-color: lightgoldenrodyellow;
+         }
+
+        table tr:nth-child(odd) {
+         background-color: lightcyan
+         }
     </style>
 
     <script>

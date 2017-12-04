@@ -7,6 +7,7 @@
     <style>
         html {
             background-color: #dfdfdf;
+            text-align: center;
         }
     </style>
 </head>
@@ -18,10 +19,11 @@
 
     if(!isset($_SESSION["userID"])) {
         print("<p>Successfully logged out!</p>");
-        print("<button onclick=\"returnHome()\">Home</button>");
     }
     else {
         print("<p>Unable to log out successfully.</p>");
     }
 ?>
+<button onclick="returnHome()">Home</button>
+</body>
 </html>

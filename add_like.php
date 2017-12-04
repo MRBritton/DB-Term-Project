@@ -7,6 +7,7 @@
     <style>
         html {
             background-color: #dfdfdf;
+            text-align: center;
         }
     </style>
     <script>
@@ -31,7 +32,7 @@
         print("Successfully updated your likes!");
     }
     else {
-        print("Could not update your likes.<br>Maybe you've already added that movie?<br>Maybe you misspelled the movie's name?");
+        print("Could not update your likes.<br>Maybe you've already added that movie?<br>Maybe you misspelled the movie's name?<br>");
     }
 
     mysqli_close($db);
